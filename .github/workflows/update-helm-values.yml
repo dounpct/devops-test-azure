@@ -1,0 +1,27 @@
+name: Update Helm Values for ArgoCD Sync
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "The Docker image tag to use (e.g., 0.0.1)"
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Update Helm values file
+      run: |
+        HELM_VALUES_FILE="helm/values.yaml"  # Path to your Helm values file
+        IMAGE_TAG="${{ github.event.inputs.tag }}"
+        sed -i "s|image:.*|image: my-app:${IMAGE_TAG}|g" $HELM_VALUES_FILE
+        git config user.name "github-actions"
+        git config user.email "github-actions@github.com"
+        git add $HELM_VALUES_FILE
+        git commit -m "Update Helm values with image tag: ${IMAGE_TAG}"
+        git push
