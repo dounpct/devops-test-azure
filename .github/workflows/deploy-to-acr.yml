@@ -6,7 +6,9 @@ on:
       - master
     tags:
       - "*"
-      
+    paths-ignore:
+      - ".github/workflows/*" # Exclude changes to workflow files
+    
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
