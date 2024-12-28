@@ -1,0 +1,17 @@
+name: Build and Deploy to Azure Container Registry
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Build Docker image
+        run: docker build -t ${{ secrets.AZURE_CONTAINER_REGISTRY }}/devops-test-azure:${{ github.sha }} .  
