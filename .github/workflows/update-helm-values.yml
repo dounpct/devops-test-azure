@@ -39,7 +39,7 @@ jobs:
       run: |
         cd argocd-azure-deployment
         ls -alrt
-        sed -i 's|^\( *tag:\).*|\1 "'"${{ github.event.inputs.tag }}"'"|' devops-test-aure/values-prod.yaml
+        sed -i 's|^\( *tag:\).*|\1 "'"${{ github.event.inputs.tag }}"'"|' applications-deployment/devops-test-aure/values-prod.yaml
         echo "Updated imageTag to ${{ github.event.inputs.tag }}"
       shell: bash
 
@@ -49,12 +49,13 @@ jobs:
       #   GIT_USER: ${{ secrets.GIT_USER }}
       #   GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
       run: |
+        cd argocd-azure-deployment
         git config user.name "dounpct"
         git config user.email "doun_pct@hotmail.com"
         git branch
         ls -lart
         cat applications-deployment/devops-test-aure/values-prod.yaml
-        git add devops-test-aure/values-prod.yaml
+        git add applications-deployment/devops-test-aure/values-prod.yaml
         git status
         git commit -m "Update image tag to ${{ github.event.inputs.tag }}"
         ls -lart
