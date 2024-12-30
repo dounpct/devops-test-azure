@@ -33,7 +33,7 @@ jobs:
         GIT_USER: ${{ secrets.GIT_USER }}
         GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
       run: |
-        git config user.name "dounpct"
+        git config user.name "jiwjiwza"
         git config user.email "doun_pct@hotmail.com"
         ls -lart
         cat values-prod.yaml
