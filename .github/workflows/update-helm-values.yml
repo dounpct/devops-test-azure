@@ -40,7 +40,8 @@ jobs:
         ls -alrt
         sed -i 's|^\( *tag:\).*|\1 "'"${{ github.event.inputs.tag }}"'"|' devops-test-aure/values-prod.yaml
         echo "Updated imageTag to ${{ github.event.inputs.tag }}"
-
+      shell: bash
+      
     - name: Commit and push changes
       # working-directory: argocd-azure-deployment
       # env:
