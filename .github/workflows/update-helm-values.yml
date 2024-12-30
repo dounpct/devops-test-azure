@@ -11,6 +11,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    env:
+      CHART_DEPLOYMENT_REPO: dounpct/argocd-azure-deployment
+      CHART_DEPLOYMENT_BRANCH: master
+      CD_CHART_REPO: argocd-azure-deployment
+      CD_VAULE_FILE: applications-deployment/devops-test-aure/values-prod.yaml
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -18,56 +24,25 @@ jobs:
     - name: Checkout chart deployment repo
       uses: actions/checkout@v3
       with:
-        repository: "dounpct/argocd-azure-deployment"
-        ref: "master"
-        path: "argocd-azure-deployment"
+        repository: ${{ env.CHART_DEPLOYMENT_REPO }}
+        ref: ${{ env.CHART_DEPLOYMENT_BRANCH }}
+        path: ${{ env.CD_CHART_REPO }}
         fetch-depth: 0
         token: ${{ secrets.GIT_TOKEN }}
 
-    # - name: Clone target repository
-    #   env:
-    #     GIT_USER: ${{ secrets.GIT_USER }}
-    #     GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
-    #   run: |
-    #     git clone https://github.com/dounpct/argocd-azure-deployment.git
-    #     cd argocd-azure-deployment
-    #     git checkout master
-    #     echo "Repository cloned successfully"
-
     - name: Update image tag in values.yaml
-      # working-directory: argocd-azure-deployment
       run: |
-        cd argocd-azure-deployment
+        cd ${{ env.CD_CHART_REPO }}
         ls -alrt
-        sed -i 's|^\( *tag:\).*|\1 "'"${{ github.event.inputs.tag }}"'"|' applications-deployment/devops-test-aure/values-prod.yaml
+        sed -i 's|^\( *tag:\).*|\1 "'"${{ github.event.inputs.tag }}"'"|' ${{ env.CD_VAULE_FILE }}
         echo "Updated imageTag to ${{ github.event.inputs.tag }}"
       shell: bash
 
     - name: Commit and push changes
-      # working-directory: argocd-azure-deployment
-      # env:
-      #   GIT_USER: ${{ secrets.GIT_USER }}
-      #   GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
       run: |
-        cd argocd-azure-deployment
+        cd ${{ env.CD_CHART_REPO }}
         git config user.name "dounpct"
         git config user.email "doun_pct@hotmail.com"
-        git branch
-        ls -lart
-        cat applications-deployment/devops-test-aure/values-prod.yaml
-        git add applications-deployment/devops-test-aure/values-prod.yaml
-        git status
+        git add ${{ env.CD_VAULE_FILE }}
         git commit -m "Update image tag to ${{ github.event.inputs.tag }}"
-        ls -lart
         git push
-
-    # - name: Update Helm values file
-    #   run: |
-    #     HELM_VALUES_FILE="helm/values.yaml"  # Path to your Helm values file
-    #     IMAGE_TAG="${{ github.event.inputs.tag }}"
-    #     sed -i "s|image:.*|image: my-app:${IMAGE_TAG}|g" $HELM_VALUES_FILE
-    #     git config user.name "github-actions"
-    #     git config user.email "github-actions@github.com"
-    #     git add $HELM_VALUES_FILE
-    #     git commit -m "Update Helm values with image tag: ${IMAGE_TAG}"
-    #     git push
