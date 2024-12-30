@@ -21,6 +21,23 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
     
+    - name: Set LINE_TOKEN environment variable
+      run: echo "LINE_TOKEN=${{ secrets.LINE_TOKEN }}" >> $GITHUB_ENV
+
+    - name: Clone shared repository
+      run: |
+        git clone https://github.com/dounpct/devops-action-azure-share-lib.git shared-repo
+        cd shared-repo
+        ls -la # Verify the contents
+      env:
+        GIT_USER: ${{ secrets.GIT_USER }}
+        GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+
+    - name: Run LINE Notification Script
+      run: |
+        cd shared-repo
+        bash startup.bash
+
     - name: Checkout chart deployment repo
       uses: actions/checkout@v3
       with:
@@ -46,3 +63,8 @@ jobs:
         git add ${{ env.CD_VAULE_FILE }}
         git commit -m "Update image tag to ${{ github.event.inputs.tag }}"
         git push
+
+    - name: Run Finish LINE Notification Script
+      run: |
+        cd shared-repo
+        bash finish.bash
