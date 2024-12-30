@@ -26,25 +26,26 @@ jobs:
         echo "Repository cloned successfully"
 
     - name: Update image tag in values.yaml
-      working-directory: argocd-azure-deployment/applications-deployment/devops-test-aure
+      working-directory: argocd-azure-deployment
       run: |
-        sed -i 's|^\( *tag:\).*|\1 "'"${{ github.event.inputs.tag }}"'"|' values-prod.yaml
+        sed -i 's|^\( *tag:\).*|\1 "'"${{ github.event.inputs.tag }}"'"|' applications-deployment/devops-test-aure/values-prod.yaml
         echo "Updated imageTag to ${{ github.event.inputs.tag }}"
 
     - name: Commit and push changes
-      working-directory: argocd-azure-deployment/applications-deployment/devops-test-aure
+      working-directory: argocd-azure-deployment
       env:
         GIT_USER: ${{ secrets.GIT_USER }}
         GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
       run: |
         git config user.name "dounpct"
         git config user.email "doun_pct@hotmail.com"
+        git branch
         ls -lart
-        cat values-prod.yaml
-        git add values-prod.yaml
+        cat applications-deployment/devops-test-aure/values-prod.yaml
+        git add applications-deployment/devops-test-aure/values-prod.yaml
         git commit -m "Update image tag to ${{ github.event.inputs.tag }}"
         ls -lart
-        git push origin
+        git push
 
     # - name: Update Helm values file
     #   run: |
