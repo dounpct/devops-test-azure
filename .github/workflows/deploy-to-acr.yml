@@ -9,10 +9,6 @@ on:
     paths-ignore:
       - ".github/workflows/*" # Exclude changes to workflow files
   workflow_dispatch:
-    inputs:
-      tag:
-        description: "The Docker image tag to use (e.g., 0.0.1)"
-        required: false
 
 jobs:
   build-and-deploy:
