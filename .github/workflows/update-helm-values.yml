@@ -18,7 +18,7 @@ jobs:
     - name: Checkout chart deployment repo
       uses: actions/checkout@v3
       with:
-        repository: "https://github.com/dounpct/argocd-azure-deployment.git"
+        repository: "dounpct/argocd-azure-deployment"
         ref: "master"
         path: "applications-deployment"
         fetch-depth: 0
