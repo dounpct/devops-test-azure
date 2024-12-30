@@ -24,7 +24,7 @@ jobs:
     - name: Update image tag in values.yaml
       working-directory: argocd-azure-deployment/applications-deployment/devops-test-aure
       run: |
-        sed -i 's/^tag:.*/tag: "${{ github.event.inputs.tag }}"/' values-prod.yaml
+        sed -i 's|^\( *tag:\).*|\1 "'"${{ github.event.inputs.tag }}"'"|' values-prod.yaml
         echo "Updated imageTag to ${{ github.event.inputs.tag }}"
 
     - name: Commit and push changes
