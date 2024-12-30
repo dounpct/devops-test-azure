@@ -30,7 +30,8 @@ jobs:
     - name: Commit and push changes
       working-directory: argocd-azure-deployment/applications-deployment/devops-test-aure
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GIT_USER: ${{ secrets.GIT_USER }}
+        GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
       run: |
         git config user.name "dounpct"
         git config user.email "doun_pct@hotmail.com"
