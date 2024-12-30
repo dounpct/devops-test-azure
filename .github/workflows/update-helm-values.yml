@@ -35,7 +35,7 @@ jobs:
     #     echo "Repository cloned successfully"
 
     - name: Update image tag in values.yaml
-      # working-directory: argocd-azure-deployment
+      working-directory: argocd-azure-deployment
       run: |
         pwd
         ls -alrt
