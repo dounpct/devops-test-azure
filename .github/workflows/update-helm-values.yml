@@ -22,7 +22,7 @@ jobs:
         ref: "master"
         path: "applications-deployment"
         fetch-depth: 0
-        token: ${{ env.GIT_TOKEN }}
+        token: ${{ secrets.GIT_TOKE }}
 
     # - name: Clone target repository
     #   env:
