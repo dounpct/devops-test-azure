@@ -22,6 +22,7 @@ jobs:
       run: |
         git clone https://github.com/dounpct/argocd-azure-deployment.git
         cd argocd-azure-deployment
+        git checkout master
         echo "Repository cloned successfully"
 
     - name: Update image tag in values.yaml
