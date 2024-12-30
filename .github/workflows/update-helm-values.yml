@@ -16,13 +16,14 @@ jobs:
       CHART_DEPLOYMENT_BRANCH: master
       CD_CHART_REPO: argocd-azure-deployment
       CD_VAULE_FILE: applications-deployment/devops-test-aure/values-prod.yaml
+      LINE_TOKEN: ${{ secrets.LINE_TOKEN }}
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
     
-    - name: Set LINE_TOKEN environment variable
-      run: echo "LINE_TOKEN=${{ secrets.LINE_TOKEN }}" >> $GITHUB_ENV
+    # - name: Set LINE_TOKEN environment variable
+    #   run: echo "LINE_TOKEN=${{ secrets.LINE_TOKEN }}" >> $GITHUB_ENV
 
     - name: Clone shared repository
       run: |
