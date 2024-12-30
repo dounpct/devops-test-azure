@@ -32,8 +32,8 @@ jobs:
     - name: Run LINE Notification Script
       run: |
         cd shared-repo
-        bash line_notification.bash
-        
+        bash startup.bash
+
     - name: Set IMAGE_TAG
       id: image_tag
       run: |
