@@ -16,6 +16,9 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Clone target repository
+      env:
+        GIT_USER: ${{ secrets.GIT_USER }}
+        GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
       run: |
         git clone https://github.com/dounpct/argocd-azure-deployment.git
         cd argocd-azure-deployment
@@ -33,7 +36,7 @@ jobs:
         GIT_USER: ${{ secrets.GIT_USER }}
         GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
       run: |
-        git config user.name "jiwjiwza"
+        git config user.name "dounpct"
         git config user.email "doun_pct@hotmail.com"
         ls -lart
         cat values-prod.yaml
