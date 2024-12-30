@@ -20,7 +20,7 @@ jobs:
       with:
         repository: "dounpct/argocd-azure-deployment"
         ref: "master"
-        path: "applications-deployment"
+        path: "argocd-azure-deployment"
         fetch-depth: 0
         token: ${{ secrets.GIT_TOKEN }}
 
