@@ -43,7 +43,7 @@ jobs:
         git add values-prod.yaml
         git commit -m "Update image tag to ${{ github.event.inputs.tag }}"
         ls -lart
-        git push
+        git push origin
 
     # - name: Update Helm values file
     #   run: |
