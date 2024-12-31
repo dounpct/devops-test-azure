@@ -7,16 +7,23 @@ on:
         description: "The Docker image tag to use (e.g., 0.0.1)"
         required: true
 
+env:
+  CHART_DEPLOYMENT_REPO: dounpct/argocd-azure-deployment
+  CHART_DEPLOYMENT_BRANCH: master
+  CD_CHART_REPO: argocd-azure-deployment
+  CD_VAULE_FILE: applications-deployment/devops-test-aure/values-prod.yaml
+  LINE_TOKEN: ${{ secrets.LINE_TOKEN }}
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    env:
-      CHART_DEPLOYMENT_REPO: dounpct/argocd-azure-deployment
-      CHART_DEPLOYMENT_BRANCH: master
-      CD_CHART_REPO: argocd-azure-deployment
-      CD_VAULE_FILE: applications-deployment/devops-test-aure/values-prod.yaml
-      LINE_TOKEN: ${{ secrets.LINE_TOKEN }}
+    # env:
+    #   CHART_DEPLOYMENT_REPO: dounpct/argocd-azure-deployment
+    #   CHART_DEPLOYMENT_BRANCH: master
+    #   CD_CHART_REPO: argocd-azure-deployment
+    #   CD_VAULE_FILE: applications-deployment/devops-test-aure/values-prod.yaml
+    #   LINE_TOKEN: ${{ secrets.LINE_TOKEN }}
 
     steps:
     - name: Checkout code
