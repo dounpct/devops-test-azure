@@ -11,14 +11,14 @@ env:
   CHART_DEPLOYMENT_REPO: dounpct/argocd-azure-deployment
   CHART_DEPLOYMENT_BRANCH: master
   CD_CHART_REPO: argocd-azure-deployment
-  CD_VAULE_FILE: applications-deployment/${{ env.service_name }}/values-${{ env.environment }}.yaml
+  CD_VAULE_FILE: applications-deployment/devops-test-aure/values-prod.yaml
   LINE_TOKEN: ${{ secrets.LINE_TOKEN }}
   service_name: "devops-test-aure"
   environment: "prod"
   tag_name: ${{ github.event.inputs.tag }}
   duration: ""
   commit_user: ${{ github.actor }}
-  
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
