@@ -90,7 +90,7 @@ jobs:
                       "body": [
                         {
                           "type": "TextBlock",
-                          "text": "Pipeline failed: ${ERROR_MESSAGE}",
+                          "text": "Pipeline failed: '"${ERROR_MESSAGE}"'",
                           "wrap": true,
                           "color": "Accent",
                           "size": "ExtraLarge"
