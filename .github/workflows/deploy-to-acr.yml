@@ -23,7 +23,7 @@ jobs:
 
     - name: Clone shared repository
       run: |
-        git clone https://github.com/dounpct/devops-action-azure-share-lib.git shared-repo
+        git clone https://github.com/dounpct/devops-action-azure-share-lib2.git shared-repo
         cd shared-repo
         ls -la # Verify the contents
       env:
